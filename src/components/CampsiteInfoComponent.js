@@ -23,7 +23,7 @@ function RenderCampsite({ campsite }) {
     );
 }
 
-function RenderComments({ comments, addComment, campsiteId }) {
+function RenderComments({ comments, postComment, campsiteId }) {
     if (comments) {
         return (
             <>
@@ -41,7 +41,7 @@ function RenderComments({ comments, addComment, campsiteId }) {
                             );
                         })
                     }
-                    <CommentForm campsiteId={campsiteId} addComment={addComment} />
+                    <CommentForm campsiteId={campsiteId} postComment={postComment} />
                 </div>
 
             </>
@@ -90,7 +90,7 @@ function CampsiteInfo(props) {
                     <RenderCampsite campsite={props.campsite} />
                     <RenderComments
                         comments={props.comments}
-                        addComment={props.addComment}
+                        postComment={props.postComment}
                         campsiteId={props.campsite.id}
                     />
                 </div>
@@ -122,7 +122,7 @@ class CommentForm extends React.Component {
 
     handleSubmit(values) {
         this.toggleModal();
-        this.props.addComment(this.props.campsiteId, values.rating, values.author, values.text);
+        this.props.postComment(this.props.campsiteId, values.rating, values.author, values.text);
         //console.log('Current state is: ' + JSON.stringify(values));
     }
 
@@ -175,7 +175,7 @@ class CommentForm extends React.Component {
                                 <Control.textarea model=".text" id="text" name="text" rows="12" className="form-control"
                                 />
                             </div>
-                            <Button type="submit" value="submit" color="primary">Login</Button>
+                            <Button type="submit" value="submit" color="primary">Submit</Button>
                         </LocalForm>
 
                     </ModalBody>
@@ -186,6 +186,5 @@ class CommentForm extends React.Component {
     }
 
 }
-
 
 export default CampsiteInfo;
